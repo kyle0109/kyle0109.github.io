@@ -1,7 +1,316 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seungwon Cho — Personal Page</title>
+  <meta name="description" content="Personal page of Seungwon Cho, Chemistry undergraduate at Seoul National University, interested in materials chemistry, electrocatalysts, and semiconductor materials for AI." />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f8fa;
+      --text: #1a1a1a;
+      --muted: #5c6370;
+      --line: #e6e8ec;
+      --accent: #2563eb;
+      --accent-soft: #eaf0fe;
+      --radius: 14px;
+      --maxw: 880px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Nav */
+    header.nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      max-width: var(--maxw); margin: 0 auto; padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .brand { font-weight: 700; letter-spacing: -0.02em; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 18px; font-size: 0.92rem; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    main { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+    section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+    section:last-of-type { border-bottom: none; }
+    h1, h2, h3 { letter-spacing: -0.02em; line-height: 1.2; }
+    h2 {
+      font-size: 1.5rem; margin: 0 0 24px;
+      display: flex; align-items: baseline; gap: 12px;
+    }
+    h2 .num { font-size: 0.8rem; color: var(--accent); font-weight: 600; }
+    .muted { color: var(--muted); }
+
+    /* Hero */
+    .hero { display: flex; align-items: center; gap: 36px; padding: 64px 0 56px; flex-wrap: wrap; }
+    .hero-text { flex: 1 1 340px; }
+    .eyebrow { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 10px; }
+    .hero h1 { font-size: 2.6rem; margin: 0 0 16px; }
+    .hero p.lead { font-size: 1.08rem; color: var(--muted); margin: 0 0 24px; max-width: 46ch; }
+    .photo {
+      flex: 0 0 auto; width: 180px; height: 180px; border-radius: 50%;
+      object-fit: cover; border: 1px solid var(--line);
+      box-shadow: 0 8px 30px rgba(20,30,60,0.08);
+    }
+    .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 10px 18px; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 600; border: 1px solid var(--line);
+    }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn.primary:hover { background: #1d4ed8; text-decoration: none; }
+    .btn.ghost { background: #fff; color: var(--text); }
+    .btn.ghost:hover { background: var(--surface); text-decoration: none; }
+
+    /* Cards / lists */
+    .card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 22px 24px; margin-top: 16px;
+    }
+    .row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .row .when { color: var(--muted); font-size: 0.9rem; white-space: nowrap; }
+    .role { font-weight: 600; }
+    ul.clean { list-style: none; padding: 0; margin: 0; }
+    ul.clean.sub { padding-left: 18px; margin-top: 6px; }
+    ul.clean.sub li { position: relative; padding-left: 16px; color: var(--muted); }
+    ul.clean.sub li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .chip-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      background: var(--accent-soft); color: #1e40af; border: 1px solid #d8e2fb;
+      padding: 6px 12px; border-radius: 999px; font-size: 0.88rem; font-weight: 500;
+    }
+    .contact-list { display: flex; flex-direction: column; gap: 10px; }
+    .contact-list .k { display: inline-block; width: 84px; color: var(--muted); }
+
+    pre.prompt {
+      background: #0f172a; color: #e2e8f0; padding: 16px 18px; border-radius: 10px;
+      overflow-x: auto; font-size: 0.86rem; line-height: 1.55; white-space: pre-wrap;
+      margin: 12px 0 0;
+    }
+    footer { max-width: var(--maxw); margin: 0 auto; padding: 32px 20px 56px; color: var(--muted); font-size: 0.88rem; }
+
+    @media (max-width: 560px) {
+      .hero h1 { font-size: 2.1rem; }
+      .photo { width: 140px; height: 140px; }
+    }
+  </style>
+</head>
 <body>
-  <h1>Welcome to my Personal Page</h1>
-  <p>Hosted on GitHub Pages!</p>
+  <header class="nav">
+    <div class="nav-inner">
+      <span class="brand">Seungwon Cho</span>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#cv">CV</a>
+        <a href="#projects">Experience</a>
+        <a href="#courses">Courses</a>
+        <a href="#contact">Contact</a>
+        <a href="#ai-usage">AI&nbsp;Usage</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top" style="border-bottom:1px solid var(--line)">
+      <div class="hero-text">
+        <p class="eyebrow">Seoul National University</p>
+        <h1>Seungwon Cho</h1>
+        <p class="lead">
+          Chemistry undergraduate with an interdisciplinary major in
+          System Semiconductor Engineering for AI. I work on materials chemistry —
+          from electrocatalysts to semiconductor materials for AI.
+        </p>
+        <div class="btns">
+          <a class="btn primary" href="assets/cv.pdf">View CV (PDF)</a>
+          <a class="btn ghost" href="https://github.com/kyle0109" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <img class="photo" src="assets/profile.jpg" alt="Portrait of Seungwon Cho"
+           onerror="this.onerror=null;this.src='assets/avatar.svg';" />
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2><span class="num">01</span> About Me</h2>
+      <p>
+        Hi, I'm <strong>Seungwon Cho</strong>, an undergraduate at Seoul National University
+        majoring in <strong>Chemistry</strong> with an interdisciplinary major in
+        <strong>System Semiconductor Engineering for AI</strong>.
+      </p>
+      <p class="muted">
+        I'm drawn to the chemistry of functional materials — understanding how structure
+        controls properties, and how that knowledge can be applied to catalysis and to the
+        semiconductor materials that power modern AI hardware. I enjoy connecting fundamental
+        chemistry with real engineering problems across these two fields.
+      </p>
+    </section>
+
+    <!-- RESEARCH INTEREST -->
+    <section id="research">
+      <h2><span class="num">02</span> Research Interest</h2>
+      <div class="card">
+        <ul class="clean">
+          <li>
+            <span class="role">Materials Chemistry</span>
+            <ul class="clean sub">
+              <li>Electrocatalysts</li>
+              <li>Semiconductor Materials for AI</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CV -->
+    <section id="cv">
+      <h2><span class="num">03</span> CV / Resume</h2>
+
+      <h3>Education</h3>
+      <div class="card">
+        <div class="row">
+          <div>
+            <div class="role">Seoul National University</div>
+            <div class="muted">Major: Chemistry · Interdisciplinary Major: System Semiconductor Engineering for AI</div>
+            <div class="muted">Credits: 73 / 130</div>
+          </div>
+          <div class="when">Mar 2024 – Present<br />Seoul, Korea</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="row">
+          <div class="role">Korea Science Academy of KAIST</div>
+          <div class="when">Mar 2021 – Feb 2024<br />Busan, Korea</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:32px">Skills</h3>
+      <div class="chip-wrap">
+        <span class="chip">Electrochemistry</span>
+        <span class="chip">Organometallic Synthesis</span>
+        <span class="chip">Materials Characterization</span>
+        <span class="chip">C++</span>
+        <span class="chip">Python</span>
+        <span class="chip">Java</span>
+      </div>
+      <p class="muted" style="font-size:0.85rem;margin-top:10px">
+        (Edit this list to match your own skills.)
+      </p>
+
+      <h3 style="margin-top:32px">Experience</h3>
+      <div class="card">
+        <div class="row">
+          <div>
+            <div class="role">Materials Chemistry &amp; Catalyst Lab, Seoul National University</div>
+            <div class="muted">Undergraduate Researcher · Advisor: Prof. Sanghoon Joo</div>
+          </div>
+          <div class="when">Jun 2026 – Present</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="row">
+          <div>
+            <div class="role">Nanocatalyst Research Lab, KAIST</div>
+            <div class="muted">Research &amp; Education Program · Advisor: Prof. Hyunjoon Song</div>
+            <div class="muted">Extension and Application of Organometallic Chemistry-Based Frameworks</div>
+          </div>
+          <div class="when">Mar 2022 – Dec 2022</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS / ACTIVITIES -->
+    <section id="projects">
+      <h2><span class="num">04</span> Activities &amp; Projects</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="role">Undergraduate Research — Electrocatalysts</div>
+          <p class="muted" style="margin:8px 0 0">
+            Research at the Materials Chemistry &amp; Catalyst Lab (SNU), studying
+            catalyst materials for electrochemical energy conversion.
+          </p>
+        </div>
+        <div class="card">
+          <div class="role">R&amp;E Program at KAIST</div>
+          <p class="muted" style="margin:8px 0 0">
+            Worked on the extension and application of organometallic
+            chemistry-based frameworks in the Nanocatalyst Research Lab.
+          </p>
+        </div>
+        <div class="card">
+          <div class="role">Computer Programming Course Project</div>
+          <p class="muted" style="margin:8px 0 0">
+            Object-oriented programming labs in Java and C++ — class design,
+            inheritance, and polymorphism (Seoul National University).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSES -->
+    <section id="courses">
+      <h2><span class="num">05</span> Courses I Plan to Take</h2>
+      <p class="muted">A selection of courses I'm planning toward my Chemistry and AI-semiconductor tracks. (Edit freely.)</p>
+      <div class="grid">
+        <div class="card"><div class="role">Physical Chemistry</div></div>
+        <div class="card"><div class="role">Quantum Chemistry</div></div>
+        <div class="card"><div class="role">Electrochemistry</div></div>
+        <div class="card"><div class="role">Semiconductor Devices</div></div>
+        <div class="card"><div class="role">Solid State Physics</div></div>
+        <div class="card"><div class="role">Materials Science</div></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2><span class="num">06</span> Contact</h2>
+      <div class="card">
+        <div class="contact-list">
+          <div><span class="k">Email</span> <a href="mailto:kyle0109@snu.ac.kr">kyle0109@snu.ac.kr</a></div>
+          <div><span class="k">GitHub</span> <a href="https://github.com/kyle0109" target="_blank" rel="noopener">github.com/kyle0109</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI USAGE -->
+    <section id="ai-usage">
+      <h2><span class="num">07</span> AI Usage</h2>
+      <p class="muted">This website was built and styled with the help of an AI coding agent.</p>
+      <div class="card">
+        <div><strong>Tool:</strong> Claude Code</div>
+        <pre class="prompt">Prompt: Build a static personal website in the repo root from my resume.
+Use assets/profile.jpg as the profile image (fall back to an avatar)
+and link assets/cv.pdf from the CV section. Include About, Research
+Interest, CV, Projects, Courses, and Contact sections with a navigation
+menu. Keep it minimal, responsive, accessible, and GitHub Pages friendly.</pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Seungwon Cho · Hosted on GitHub Pages ·
+    <a href="#top">Back to top ↑</a>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
